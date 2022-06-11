@@ -7,9 +7,10 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews().AddFluentValidation(options => {
-    options.RegisterValidatorsFromAssemblyContaining<CustomerValidator>();
-});
+builder.Services.AddControllersWithViews().AddFluentValidation(opt =>
+     {
+         opt.RegisterValidatorsFromAssemblyContaining<CustomerValidator>();
+     });
 
 builder.Configuration.GetConnectionString("ConnectionString");
 builder.Services.AddDbContext<AppDbContext>(options => { options.UseSqlServer(builder.Configuration["ConnectionString"]); });

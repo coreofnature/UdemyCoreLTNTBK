@@ -13,6 +13,8 @@ namespace FluentValidationApp.Web.FluentValidators
             RuleFor(x => x.Age).NotEmpty().WithMessage("Age alanı boş bırakılamaz")
                 .InclusiveBetween(18,60).WithMessage("Age alanı 18 ile 60 arasında olmalıdır");
 
+            RuleForEach(x => x.Addresses).SetValidator(new AddressValidator());
+
         }
     }
 }
