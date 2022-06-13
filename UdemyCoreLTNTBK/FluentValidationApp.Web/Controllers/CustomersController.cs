@@ -60,8 +60,9 @@ namespace FluentValidationApp.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Email,Age")] Customer customer)
         {
-            var result = _customerValidator.Validate(customer);
-            if (result.IsValid)
+            var validationResult = _customerValidator.Validate(customer);
+
+            if (validationResult.IsValid)
             {
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
@@ -98,7 +99,9 @@ namespace FluentValidationApp.Web.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            var validationResult = _customerValidator.Validate(customer);
+
+            if (validationResult.IsValid)
             {
                 try
                 {
