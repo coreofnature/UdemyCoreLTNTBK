@@ -18,6 +18,8 @@ builder.Services.AddControllersWithViews().AddFluentValidation(opt =>
     opt.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 });
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 builder.Configuration.GetConnectionString("ConnectionString");
 
 builder.Services.AddDbContext<AppDbContext>(opt =>
